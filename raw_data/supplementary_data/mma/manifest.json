@@ -1,0 +1,612 @@
+[
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 212,
+    "name": "Bednight capacity of Guest houses",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 213,
+    "name": "Bednight capacity of Hotels",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 320,
+    "first": "2000-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 214,
+    "name": "Bednight capacity of Resorts",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 464,
+    "first": "1988-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 215,
+    "name": "Bednight capacity of Safari vessels",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 217,
+    "name": "Occupancy rate for Guest houses",
+    "frequency": "Monthly",
+    "unit": "Percent",
+    "points": 320,
+    "first": "2000-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 218,
+    "name": "Occupancy rate for Hotels",
+    "frequency": "Monthly",
+    "unit": "Percent",
+    "points": 320,
+    "first": "2000-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 219,
+    "name": "Occupancy rate for Resorts",
+    "frequency": "Monthly",
+    "unit": "Percent",
+    "points": 464,
+    "first": "1988-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 220,
+    "name": "Occupancy rate for Safari vessels",
+    "frequency": "Monthly",
+    "unit": "Percent",
+    "points": 320,
+    "first": "2000-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 221,
+    "name": "Registered bed capacity",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 236,
+    "first": "2007-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 222,
+    "name": "Registered bed capacity of Guest houses",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 223,
+    "name": "Registered bed capacity of Hotels",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 236,
+    "first": "2007-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 224,
+    "name": "Registered bed capacity of Resorts",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 236,
+    "first": "2007-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 225,
+    "name": "Registered bed capacity of Safari vessels",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 227,
+    "name": "Operational bed capacity of Guest houses",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 228,
+    "name": "Operational bed capacity of Hotels",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 320,
+    "first": "2000-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 229,
+    "name": "Operational bed capacity of Resorts",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 464,
+    "first": "1988-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 230,
+    "name": "Operational bed capacity of Safari vessels",
+    "frequency": "Monthly",
+    "unit": "Beds",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 231,
+    "name": "Registered number of tourist establishments",
+    "frequency": "Monthly",
+    "unit": "Establishments",
+    "points": 236,
+    "first": "2007-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 232,
+    "name": "Registered number of Guest houses",
+    "frequency": "Monthly",
+    "unit": "Guest Houses",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 233,
+    "name": "Registered number of Hotels",
+    "frequency": "Monthly",
+    "unit": "Hotels",
+    "points": 236,
+    "first": "2007-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 234,
+    "name": "Registered number of Resorts",
+    "frequency": "Monthly",
+    "unit": "Resorts",
+    "points": 236,
+    "first": "2007-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 235,
+    "name": "Registered number of Safari vessels",
+    "frequency": "Monthly",
+    "unit": "Safari Vessels",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 236,
+    "name": "Operational number of tourist establishments",
+    "frequency": "Monthly",
+    "unit": "Establishments",
+    "points": 248,
+    "first": "2006-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 237,
+    "name": "Operational number of Guest houses",
+    "frequency": "Monthly",
+    "unit": "Guest Houses",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 238,
+    "name": "Operational number of Hotels",
+    "frequency": "Monthly",
+    "unit": "Hotels",
+    "points": 248,
+    "first": "2006-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 239,
+    "name": "Operational number of Resorts",
+    "frequency": "Monthly",
+    "unit": "Resorts",
+    "points": 248,
+    "first": "2006-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "bed_capacity_occupancy",
+    "id": 240,
+    "name": "Operational number of Safari vessels",
+    "frequency": "Monthly",
+    "unit": "Safari Vessels",
+    "points": 200,
+    "first": "2010-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "flight_movements",
+    "id": 242,
+    "name": "Total number of arrival flights",
+    "frequency": "Monthly",
+    "unit": "Flights",
+    "points": 176,
+    "first": "2012-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "flight_movements",
+    "id": 243,
+    "name": "Total number of scheduled flights",
+    "frequency": "Monthly",
+    "unit": "Flights",
+    "points": 176,
+    "first": "2012-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "flight_movements",
+    "id": 244,
+    "name": "Total number of general flights",
+    "frequency": "Monthly",
+    "unit": "Flights",
+    "points": 176,
+    "first": "2012-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "travel_receipts",
+    "id": 246,
+    "name": "Travel receipts",
+    "frequency": "Monthly",
+    "unit": "US dollar",
+    "points": 187,
+    "first": "2011-01-31",
+    "last": "2026-07-31"
+  },
+  {
+    "group": "travel_receipts",
+    "id": 3409,
+    "name": "Travel",
+    "frequency": "Annual",
+    "unit": "US dollar",
+    "points": 16,
+    "first": "2011-12-31",
+    "last": "2026-12-31"
+  },
+  {
+    "group": "travel_receipts",
+    "id": 3412,
+    "name": "Travel",
+    "frequency": "Annual",
+    "unit": "US dollar",
+    "points": 16,
+    "first": "2011-12-31",
+    "last": "2026-12-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4039,
+    "name": "United States dollar",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 488,
+    "first": "1986-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4040,
+    "name": "Australian dollar",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4041,
+    "name": "Canadian dollar",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4042,
+    "name": "Chinese yuan",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4043,
+    "name": "Danish krone",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4044,
+    "name": "Euro",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 331,
+    "first": "1999-02-28",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4045,
+    "name": "Great Britain pound",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 416,
+    "first": "1992-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4046,
+    "name": "Hong Kong dollar",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4047,
+    "name": "Indian rupee",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 488,
+    "first": "1986-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4048,
+    "name": "Indonesian rupiah",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4049,
+    "name": "Japanese yen",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 488,
+    "first": "1986-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4050,
+    "name": "Malaysian ringgit",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4051,
+    "name": "New Zealand dollar",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4052,
+    "name": "Norwegian kroner",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4053,
+    "name": "Saudi riyal",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4054,
+    "name": "Singapore dollar",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 488,
+    "first": "1986-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4055,
+    "name": "Sri Lankan rupee",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 488,
+    "first": "1986-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4056,
+    "name": "Swedish krona",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4057,
+    "name": "Swiss franc",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4058,
+    "name": "Thai baht",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4059,
+    "name": "UAE dirham",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 167,
+    "first": "2012-10-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4061,
+    "name": "MVR per USD (average)",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 320,
+    "first": "2000-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4062,
+    "name": "MVR per SDR",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 488,
+    "first": "1986-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "exchange_rates",
+    "id": 4063,
+    "name": "US dollar per SDR",
+    "frequency": "Monthly",
+    "unit": "US dollar",
+    "points": 488,
+    "first": "1986-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "cpi_prices",
+    "id": 280,
+    "name": "Total index",
+    "frequency": "Monthly",
+    "unit": "Index",
+    "points": 500,
+    "first": "1985-01-31",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "cpi_prices",
+    "id": 520,
+    "name": "Restaurants and accommodation services",
+    "frequency": "Monthly",
+    "unit": "Index",
+    "points": 267,
+    "first": "2004-06-30",
+    "last": "2026-08-31"
+  },
+  {
+    "group": "tourism_gdp",
+    "id": 4943,
+    "name": "GDP at market price",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 151,
+    "first": "2014-01-31",
+    "last": "2026-07-31"
+  },
+  {
+    "group": "tourism_gdp",
+    "id": 4955,
+    "name": "Tourism",
+    "frequency": "Monthly",
+    "unit": "Rufiyaa",
+    "points": 151,
+    "first": "2014-01-31",
+    "last": "2026-07-31"
+  }
+]
