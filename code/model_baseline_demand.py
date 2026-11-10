@@ -1,34 +1,7 @@
 #!/usr/bin/env python3
-"""Demand-side forecasting baseline for Maldives tourist arrivals, rebuilt to
-match the structure of the MMA/Shuaib (2021) benchmark paper after reading it
-in full (see logs/DEV_LOG.md, 2026-11-08 entries) rather than defaulting to a
-generic SARIMA.
-
-Matches the benchmark's approach:
-  - ADF stationarity test decides differencing (not assumed)
-  - log(arrivals), not raw levels
-  - seasonality via monthly dummy regressors, not seasonal (SARIMA) differencing
-  - economically-motivated regressors: flight movements, USD/MVR exchange rate
-  - ARIMA order chosen by AIC grid search, not asserted
-  - residual diagnostics reported (Ljung-Box / heteroskedasticity / normality),
-    not discarded
-
-Deliberate departure from the benchmark, flagged explicitly rather than
-silently matched or silently diverged (see docs/supervisor_questions_2026-11-08.txt,
-question 2 -- not yet answered by the supervisor): COVID is handled with a
-dummy variable covering the zero-arrival closure months, rather than MMA's
-full scenario-based abandonment of the ARIMA model for 2020-2023. The dataset
-here runs through mid-2026, three-plus years past the acute crisis MMA was
-writing into, which is the main reason a dummy is more defensible here than
-it would have been in 2021.
-
-Known limitation of this backtest (stated, not hidden): flight movements and
-the exchange rate are used as regressors using their *actual realized* values
-in the test window, not independently forecast values. That's fine for
-evaluating whether these regressors explain arrivals in-sample/out-of-sample,
-but this script as written could not be used for a genuine forward forecast
-without first forecasting those two inputs themselves.
-"""
+"""Demand-side ARIMA baseline for Maldives tourist arrivals, benchmarked
+against the MMA/Shuaib (2021) model structure. Uses realized (not forecast)
+flight/exchange-rate values, so it isn't yet usable for a forward forecast."""
 from pathlib import Path
 
 import matplotlib
@@ -53,10 +26,7 @@ def load_series() -> pd.DataFrame:
     df = pd.read_csv(DATA)
     df["date"] = pd.to_datetime(dict(year=df["year"], month=df["month"], day=1))
     df = df.sort_values("date").set_index("date").asfreq("MS")
-    # log(0) is undefined for the 3 total-closure months (border shut, literal
-    # zero arrivals) -- treat as missing rather than imputing a fake value;
-    # SARIMAX's state-space form handles missing endog natively (Kalman filter
-    # interpolation), which is the right tool here, not a fabricated number.
+    # log(0) is undefined for the 3 COVID zero-arrival months; treat as missing.
     with np.errstate(divide="ignore"):
         df["log_arrivals"] = np.log(df["total_arrivals"].replace(0, np.nan))
     df["covid_closure"] = [
@@ -103,9 +73,7 @@ def grid_search_order(endog, exog, d, p_range=range(0, 4), q_range=range(0, 4)):
 
 def main():
     df = load_series()
-    # Flight movements (a regressor, matching MMA's use of flight data) only
-    # exist from 2012-01 onward in the MMA series -- truncate to that start
-    # rather than fabricate pre-2012 values or silently drop the regressor.
+    # Flight-movement data only exists from 2012-01 onward; truncate to that.
     first_valid = df[FLIGHT_COL].first_valid_index()
     dropped = df.loc[df.index < first_valid]
     print(f"Truncating to {first_valid.date()} onward -- {len(dropped)} earlier months "
@@ -117,39 +85,30 @@ def main():
     print(f"Train: {train.index[0].date()} to {train.index[-1].date()} ({len(train)} months)")
     print(f"Test:  {test.index[0].date()} to {test.index[-1].date()} ({len(test)} months)")
 
-    # --- Step 1: stationarity, decide d (don't assume it) ---
+    # Stationarity: decide d from the data instead of assuming it.
     print("\n=== Stationarity (ADF) ===")
     p_level = run_adf(train["log_arrivals"], "log(arrivals), levels")
     p_diff = run_adf(train["log_arrivals"].diff(), "log(arrivals), 1st diff")
     d = 0 if p_level < 0.05 else (1 if p_diff < 0.05 else 2)
-    print(f"-> using d={d} (matches MMA's own finding of I(1) at 5% for their series)")
+    print(f"-> using d={d}")
 
     exog_train = train[exog_cols()]
     exog_test = test[exog_cols()]
 
-    # --- Step 2: order selection by BIC (not AIC), not asserted ---
-    # BIC penalizes extra parameters more heavily than AIC -- the right call
-    # here given 163 training months and a model that already carries 14
-    # regressors (11 month dummies + covid + 2 economic vars); AIC selection
-    # picked ARIMA(3,0,2) in an earlier run of this script, which produced a
-    # singular covariance matrix and a non-converged fit -- a textbook
-    # overfitting symptom on a short, collinear series. BIC is the standard
-    # fix and is reported alongside AIC below for transparency.
+    # Order selection by BIC (AIC overfit to a singular, non-converged model).
     print("\n=== Order search (p, q), sorted by BIC ===")
     aic_table = grid_search_order(train["log_arrivals"], exog_train, d=d)
     print(aic_table.head(10).to_string(index=False))
     best_p, best_q = int(aic_table.iloc[0]["p"]), int(aic_table.iloc[0]["q"])
     print(f"-> selected order=({best_p},{d},{best_q}) by lowest BIC")
 
-    # --- Step 3: fit final model ---
     model = SARIMAX(
         train["log_arrivals"], exog=exog_train, order=(best_p, d, best_q),
         enforce_stationarity=False, enforce_invertibility=False,
     )
     fit = model.fit(disp=False)
-    print("\n" + str(fit.summary()))  # includes Ljung-Box, heteroskedasticity, JB normality
+    print("\n" + str(fit.summary()))  # includes residual diagnostics
 
-    # --- Step 4: forecast + evaluate against actual + seasonal-naive ---
     forecast = fit.get_forecast(steps=TEST_MONTHS, exog=exog_test)
     pred_log = forecast.predicted_mean
     pred_ci_log = forecast.conf_int(alpha=0.05)
@@ -178,7 +137,6 @@ def main():
         print(f"-> model does NOT beat seasonal-naive ({model_mape:.2f}% >= {naive_mape:.2f}% MAPE) "
               f"-- its added complexity isn't earning its keep on this holdout")
 
-    # --- Step 5: plot ---
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(train.index[-36:], train["total_arrivals"].iloc[-36:], label="train (actual)")
     ax.plot(test.index, actual, label="test (actual)", color="black", marker="o")

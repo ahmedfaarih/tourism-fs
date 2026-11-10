@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""Build a single tidy monthly dataset for modeling, from the raw extracted
-tourism data plus supplementary MMA/weather series.
-
-Applies documented fixes for known data-quality issues (see
-data_quality_audit_2026-11-08.md) without touching the raw source files in
-tourism_dataset_extracted/ or supplementary_data/.
-
-Output: tourism_model_dataset.csv, one row per month, 2009-01 .. 2026-07.
-"""
+"""Merges raw ministry + supplementary data into tourism_model_dataset.csv."""
 import json
 from pathlib import Path
 
@@ -20,10 +12,7 @@ SUPP_MMA = ROOT / "raw_data" / "supplementary_data" / "mma"
 SUPP_WEATHER = ROOT / "raw_data" / "supplementary_data" / "weather"
 OUT_DIR = ROOT / "model_outputs"
 
-# Region taxonomy crosswalk: raw key (as it appears in some years) -> stable key.
-# OCEANIA (2009 only) folds into ASIA & THE PACIFIC from 2010 onward.
-# UN PASSPORT HOLDERS (2014-2016 only) and OTHERS (2014+) get their own stable
-# buckets rather than being dropped or merged into an existing region.
+# Raw region key -> stable key, since category names shift across years.
 REGION_CROSSWALK = {
     "OCEANIA": "ASIA & THE PACIFIC",
     "ASIA &amp; THE PACIFIC": "ASIA & THE PACIFIC",
@@ -41,12 +30,10 @@ STABLE_REGIONS = [
     "OTHERS", "UN PASSPORT HOLDERS",
 ]
 
-# Countries known to drop out of the taxonomy entirely (not renamed into another
-# bucket) -- flagged explicitly rather than silently treated as zero.
+# Countries that drop out of the taxonomy entirely (flagged, not zeroed).
 DISCONTINUED_COUNTRIES = {"Taiwan": 2023, "Israel": 2025, "Turkey": 2025}
 
-# Months with known-bad region breakdowns (ASIA & THE PACIFIC missing entirely,
-# ~40% of total unaccounted for) -- region-level columns are set to NaN for these.
+# Months with a known-broken region breakdown; nulled rather than trusted.
 BROKEN_REGION_MONTHS = {(2026, 6), (2026, 7)}
 
 
@@ -165,9 +152,7 @@ def main():
     monthly_rows = load_monthly_rows()
     df = pd.DataFrame(monthly_rows).sort_values(["year", "month"]).reset_index(drop=True)
 
-    # Sanity check: annual_summary.total_arrivals must equal sum(monthly totals),
-    # already verified in the audit for all years -- re-check here so a future
-    # change to the raw files doesn't silently break this invariant.
+    # Sanity check: annual_summary total must equal sum(monthly totals).
     for year_dir in sorted(EXTRACTED.iterdir()):
         if not year_dir.is_dir():
             continue
@@ -181,9 +166,7 @@ def main():
             print(f"WARNING: {year} annual_summary total ({annual_total}) != "
                   f"sum of monthly ({computed})")
 
-    # Discontinued-country sanity check (printed, not merged into the output --
-    # country-level series need their own crosswalk if used later; out of scope
-    # for the arrivals baseline).
+    # Discontinued-country sanity check (printed only, not merged into output).
     country_frames = load_country_presence()
     for note in check_discontinued_countries(country_frames):
         print("NOTE:", note)
@@ -204,9 +187,7 @@ def main():
     fx = load_mma_series("exchange_rates.json", {})
     df = df.merge(fx, on=["year", "month"], how="left")
 
-    # Weather: truncate to the shorter common range (tourism data stops 2026-07,
-    # weather monthly data runs through 2026-09) -- the merge below does this
-    # automatically via how="left" against the tourism-anchored df.
+    # Weather runs longer than tourism data; left-merge truncates it to match.
     weather = load_weather_monthly()
     df = df.merge(weather, on=["year", "month"], how="left")
 
