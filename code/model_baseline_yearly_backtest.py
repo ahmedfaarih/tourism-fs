@@ -80,7 +80,9 @@ def main():
 
     result = pd.DataFrame(rows)
     print("\n=== Year-by-year backtest, all variants ===")
-    print(result.pivot(index="year", columns="model", values="mape").round(2).to_string())
+    for metric, unit in [("mape", "%"), ("mae", "arrivals"), ("rmse", "arrivals")]:
+        print(f"\n--- {metric.upper()} ({unit}) by year/model ---")
+        print(result.pivot(index="year", columns="model", values=metric).round(2).to_string())
 
     out_path = OUT_DIR / "baseline_yearly_backtest.csv"
     result.to_csv(out_path, index=False)

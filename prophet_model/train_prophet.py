@@ -139,7 +139,9 @@ def main():
         print()
 
     yearly_result = pd.DataFrame(yearly_rows)
-    print(yearly_result.pivot(index="year", columns="model", values="mape").round(2).to_string())
+    for metric, unit in [("mape", "%"), ("mae", "arrivals"), ("rmse", "arrivals")]:
+        print(f"\n--- {metric.upper()} ({unit}) by year/model ---")
+        print(yearly_result.pivot(index="year", columns="model", values=metric).round(2).to_string())
     out_path = OUT_DIR / "prophet_yearly_backtest.csv"
     yearly_result.to_csv(out_path, index=False)
     print(f"\nWrote {out_path}")
