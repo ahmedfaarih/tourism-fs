@@ -11,6 +11,7 @@ Runs three regressor variants side by side:
   supply_augmented    -- demand_only regressors + total_beds (national bed capacity),
                          the actual supply-side regressor this thesis's RQ is about
 """
+import warnings
 from pathlib import Path
 
 import matplotlib
@@ -18,8 +19,15 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from statsmodels.tools.sm_exceptions import ConvergenceWarning
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.statespace.sarimax import SARIMAX
+
+# Grid-search tries (p, q) combinations that are expected not to all converge; the
+# resulting ConvergenceWarning is redundant noise since the printed grid already has
+# its own `converged` column. Silencing it here, not globally, keeps a real warning
+# elsewhere from going unnoticed.
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 ROOT = Path(__file__).parent.parent
 DATA = ROOT / "model_outputs" / "tourism_model_dataset.csv"
@@ -52,7 +60,7 @@ def load_series() -> pd.DataFrame:
 
 
 def run_adf(series: pd.Series, label: str):
-    stat, pval, *_ = adfuller(series.dropna(), autolag="AIC")
+    stat, pval, *_ = adfuller(series.dropna(), autolag="AIC", result_object=False)
     verdict = "stationary (reject unit root)" if pval < 0.05 else "non-stationary (unit root present)"
     print(f"ADF[{label}]: stat={stat:.4f}  p={pval:.4f}  -> {verdict}")
     return pval
@@ -116,6 +124,9 @@ def fit_and_forecast(train, test, variant, d):
         train["log_arrivals"], exog=exog_train, order=(best_p, d, best_q),
         enforce_stationarity=False, enforce_invertibility=False,
     ).fit(disp=False)
+    if not fit.mle_retvals.get("converged", True):
+        print(f"-> WARNING: the selected ({best_p},{d},{best_q}) model itself did not converge "
+              f"-- treat its forecast with caution")
 
     forecast = fit.get_forecast(steps=len(test), exog=exog_test)
     pred_mean = np.exp(forecast.predicted_mean)

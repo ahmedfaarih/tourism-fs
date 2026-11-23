@@ -68,6 +68,8 @@ def main():
                 train["log_arrivals"], exog=exog_train, order=order,
                 enforce_stationarity=False, enforce_invertibility=False,
             ).fit(disp=False)
+            if not fit.mle_retvals.get("converged", True):
+                print(f"-> WARNING: {year} [{variant}] fit did not converge -- treat with caution")
             pred = np.exp(fit.get_forecast(steps=len(test), exog=exog_test).predicted_mean)
             mape, mae, rmse = score(actual, pred, f"{year} [{variant}]")
             rows.append({"year": year, "model": variant, "mape": mape, "mae": mae, "rmse": rmse})
